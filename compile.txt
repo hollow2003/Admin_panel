@@ -1,0 +1,1 @@
+g++ -o admin_panel *.cpp -L/usr/lib/x86_64-linux-gnu -lglfw -lGL -lGLEW -lX11 -lpthread -lXrandr -lXi -ldl
