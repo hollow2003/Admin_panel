@@ -274,7 +274,7 @@ int main() {
                             ImGui::Text("%s", detail["address"].c_str());
                             ImGui::TableSetColumnIndex(2);
                             bool interested = std::stoi(detail["interested"]);
-                            if (ImGui::Checkbox(("##interested" + device).c_str(), &interested)) {
+                            if (ImGui::Checkbox(("##interested" + device + detail["address"]).c_str(), &interested)) {
                                 detail["interested"] = std::to_string(interested);
                                 std::future<void> fut1 = std::async(std::launch::async, UpdateDeviceTopicConfigToServer, device, detail, "interested");
                                 fut1.wait();
@@ -283,7 +283,7 @@ int main() {
                             ImGui::TableSetColumnIndex(3);
                             if (interested == 1) {
                                 int cycle = std::stoi(detail["cycle"]);
-                                ImGui::InputInt(("##cycle" + device).c_str(), &cycle);
+                                ImGui::InputInt(("##cycle" + device + detail["address"]).c_str(), &cycle);
                                 if (cycle != previousCycleStates[device][detail["address"]]) {
                                         if (cycle <= 0) {
                                             cycle = 1; // 防止负值
@@ -301,7 +301,7 @@ int main() {
                             }
                             ImGui::TableSetColumnIndex(4);
                             bool proxy = std::stoi(detail["proxy"]);
-                            if (ImGui::Checkbox(("##proxy" + device).c_str(), &proxy)) {
+                            if (ImGui::Checkbox(("##proxy" + device + detail["address"]).c_str(), &proxy)) {
                                 detail["proxy"] = std::to_string(proxy);
                                 std::future<void> fut3 = std::async(std::launch::async, UpdateDeviceTopicConfigToServer, device, detail, "proxy");
                                 fut3.wait();
